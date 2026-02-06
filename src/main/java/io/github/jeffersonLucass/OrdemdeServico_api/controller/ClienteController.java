@@ -3,10 +3,11 @@ package io.github.jeffersonLucass.OrdemdeServico_api.controller;
 import io.github.jeffersonLucass.OrdemdeServico_api.entity.Cliente;
 import io.github.jeffersonLucass.OrdemdeServico_api.repository.ClienteRepository;
 import io.github.jeffersonLucass.OrdemdeServico_api.service.ClienteService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/cliente")
@@ -27,7 +28,12 @@ public class ClienteController {
         return clienteService.criar(cliente);
     }
 
+    @PutMapping("/{id}")
+    public Cliente atualizarCliente(@PathVariable UUID id,@RequestBody Cliente cliente) {
 
+        System.out.println("Cliente atualizado com sucesso " + cliente);
+        return clienteService.atualizar(id, cliente);
+    }
 
 
 
