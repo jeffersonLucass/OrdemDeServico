@@ -41,9 +41,9 @@ public class OrdemServicoService {
 
     // 🔹 Atualizar OS (somente se não estiver FINALIZADA)
     @Transactional
-    public OrdemServico atualizar(UUID clienteId, OrdemServico ordemServico) {
+    public OrdemServico atualizar(UUID ordemServicoId, OrdemServico ordemServico) {
 
-        OrdemServico osExists = ordemServicoRepository.findById(clienteId).orElseThrow(
+        OrdemServico osExists = ordemServicoRepository.findById(ordemServicoId).orElseThrow(
                 (EntityNotFoundException::new)
         );
         if(osExists.getStatus() == StatusOrdemServico.FINALIZADA){
@@ -61,9 +61,9 @@ public class OrdemServicoService {
     // FINALIZAR OS
 
     @Transactional
-    public OrdemServico finalizar(UUID clienteId){
+    public OrdemServico finalizar(UUID ordemServicoId){
 
-        OrdemServico osExists = ordemServicoRepository.findById(clienteId).orElseThrow(
+        OrdemServico osExists = ordemServicoRepository.findById(ordemServicoId).orElseThrow(
                 (EntityNotFoundException::new)
         );
 
@@ -80,13 +80,9 @@ public class OrdemServicoService {
 
 
 
-
-
-
-
     // 🔹 Buscar por ID
-    public  OrdemServico buscar(UUID clienteId){
-        return ordemServicoRepository.findById(clienteId).orElseThrow(
+    public  OrdemServico buscar(UUID ordemServicoId){
+        return ordemServicoRepository.findById(ordemServicoId).orElseThrow(
                 () -> new EntityNotFoundException("Ordem de serviço não encontrada")
         );
     }
@@ -95,8 +91,9 @@ public class OrdemServicoService {
 
     // 🔹 Deletar OS
     @Transactional
-    public void deletar(UUID clienteId){
-        OrdemServico os  =  ordemServicoRepository.findById(clienteId).orElseThrow(
+    public void deletar(UUID ordemServicoId){
+
+        OrdemServico os  =  ordemServicoRepository.findById(ordemServicoId).orElseThrow(
                 (RuntimeException::new)
         );
 

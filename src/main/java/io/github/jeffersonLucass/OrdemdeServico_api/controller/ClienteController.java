@@ -1,23 +1,20 @@
 package io.github.jeffersonLucass.OrdemdeServico_api.controller;
 
 import io.github.jeffersonLucass.OrdemdeServico_api.entity.Cliente;
-import io.github.jeffersonLucass.OrdemdeServico_api.repository.ClienteRepository;
 import io.github.jeffersonLucass.OrdemdeServico_api.service.ClienteService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
 
-    private final ClienteRepository clienteRepository;
     private final ClienteService clienteService;
 
-    public ClienteController(ClienteRepository clienteRepository,ClienteService clienteService) {
-        this.clienteRepository = clienteRepository;
+    public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
 
@@ -35,6 +32,19 @@ public class ClienteController {
         return clienteService.atualizar(id, cliente);
     }
 
+    @GetMapping
+    public List<Cliente> listarClientes(){
+        System.out.println("Cliente listado com sucesso");
+
+        return clienteService.listarTodos();
+
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarCliente(@PathVariable  UUID id){
+        clienteService.excluir(id);
+    }
 
 
 

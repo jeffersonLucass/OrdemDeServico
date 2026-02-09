@@ -51,6 +51,7 @@ public class ClienteService {
             throw new EntityNotFoundException("Cliente não encontrado");
         }
         clienteRepository.deleteById(id);
+
    }
 
 

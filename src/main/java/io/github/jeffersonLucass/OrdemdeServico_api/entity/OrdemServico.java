@@ -22,7 +22,6 @@ public class OrdemServico {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotNull(message = "Cliente é obrigatório")
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
@@ -30,7 +29,6 @@ public class OrdemServico {
     @Column(nullable = false)
     private String descricao;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusOrdemServico status;
